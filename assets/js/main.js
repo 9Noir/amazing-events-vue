@@ -3,7 +3,7 @@ const eventNotFound = [{ id: 0, image: "https://i.ibb.co/HzD6k2W/image.png", nam
 const { createApp } = Vue;
 createApp({
     data() {
-        return { currentDate: "", events: [], filteredEvents: [], categories: [], checkedCategories: [], searchText: "", contactContent: {showModal: false }, statsData: {} };
+        return { currentDate: "", events: [], filteredEvents: [], categories: [], checkedCategories: [], searchText: "", contactContent: { showModal: false }, statsData: {} };
     },
     async created() {
         setDarkMode();
@@ -77,6 +77,7 @@ createApp({
                 let searchMatch = JSON.stringify(event).toLowerCase().includes(this.searchText.toLowerCase());
                 return categoryMatch && searchMatch;
             });
+            if (this.filteredEvents.length === 0) this.filteredEvents = eventNotFound;
         },
     },
 }).mount("#app");
