@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+    <title>Details</title>
+</head>
+
+<body>
+    <header>
+        <a href="index.html">
+            <img class="w-40" src="assets/img/Logo_Amazing_Events.png" alt="Logo Amazing Events">
+        </a>
+        <input type="radio" id="open-nav" class="peer/open-nav hidden" name="menu-navbar">
+        <input type="radio" name="menu-navbar" class="peer/close-nav hidden" id="close-nav" checked>
+        <label for="open-nav" class="menu-btn max-md:peer-checked/close-nav:flex"><i class="bi bi-list"></i></label>
+        <label for="close-nav" class="menu-btn max-md:peer-checked/open-nav:flex"><i class="bi bi-x"></i></label>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="upcoming.html">Upcoming Events</a>
+            <a href="past.html">Past Events</a>
+            <a href="contact.html">Contact</a>
+            <a href="stats.html">Stats</a>
+        </nav>
+        <button onclick="toggleDarkMode()" class="toggleDark-btn"></button>
+    </header>
+
+    <main id="app">
+        {{extractIdFromUrl}}
+        <div class="flex p-5 my-auto dark:text-slate-50" id="container" v-for="event of events">
+            <div class="card flex-wrap md:flex-row w-[70rem]">
+                <p class="event-category">{{event.category}}</p>
+                <img :src="event.image" :alt="'Image of '+event.name" class="max-md:w-full md:w-2/3 max-md:h-60 flex-grow object-cover">
+                <div class="flex flex-col md:w-1/3">
+                    <p class="event-title md:text-4xl bg-pink-700 text-slate-50 max-md:py-1 py-6 px-2">{{event.name}}</p>
+                    <div class="p-4 flex-col flex flex-grow">
+                        <div class="flex my-auto">
+                            <div>
+                                <div class="event-date-container">
+                                    <p class="event-month bg-pink-700 text-xl text-slate-50">{{splitDate(event.date,1)}}</p>
+                                    <div class="px-3">
+                                        <p class="event-day text-5xl py-4">{{splitDate(event.date,2)}}</p>
+                                        <div class="flex justify-between text-sm font-normal pb-2">
+                                            <p class="event-weekDay">{{splitDate(event.date,0)}}</p>
+                                            <p class="event-year">{{splitDate(event.date,3)}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="event-description pl-4 my-auto">{{event.description}}</p>
+                        </div>
+                        <div class="event-details grid grid-cols-2 gap-4 py-4">
+                            <p class="event-assistance" title="Assistance or estimate"><i class="bi bi-person-fill"></i> {{event.assistance||event.estimate}}</p>
+                            <p class="text-right" title="Capacity">{{event.capacity}} <i class="bi bi-people-fill"></i></p>
+                            <p class="event-price" title="Price"><i class="bi bi-credit-card-fill"></i> {{event.price}}</p>
+                            <p class="text-right" title="Place">{{event.place}} <i class="bi bi-geo-alt-fill"></i></p>
+                        </div>
+                        <div class="flex flex-col">
+                            <a class="btn mb-4 bg-pink-800" :href="'contact.html?id='+event._id">Contact</a>
+                            <button class="btn mt-auto" onclick="window.history.go(-1)">Back</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="socials-container">
+            <a href="#"><i class="bi bi-instagram"></i></a>
+            <a href="#"><i class="bi bi-facebook"></i></a>
+            <a href="#"><i class="bi bi-whatsapp"></i></a>
+        </div>
+        <div class="commission">FE05-TN</div>
+    </footer>
+
+    <script src="https://unpkg.com/vue@3.2.47/dist/vue.global.js"></script>
+    <script src="assets/js/main.js"></script>
+</body>
+
+</html>

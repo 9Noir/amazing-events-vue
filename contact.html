@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+    <title>Contact</title>
+</head>
+
+<body>
+    <header>
+        <a href="index.html">
+            <img class="w-40" src="assets/img/Logo_Amazing_Events.png" alt="Logo Amazing Events">
+        </a>
+        <input type="radio" id="open-nav" class="peer/open-nav hidden" name="menu-navbar">
+        <input type="radio" name="menu-navbar" class="peer/close-nav hidden" id="close-nav" checked>
+        <label for="open-nav" class="menu-btn max-md:peer-checked/close-nav:flex"><i class="bi bi-list"></i></label>
+        <label for="close-nav" class="menu-btn max-md:peer-checked/open-nav:flex"><i class="bi bi-x"></i></label>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="upcoming.html">Upcoming Events</a>
+            <a href="past.html">Past Events</a>
+            <a href="#">Contact</a>
+            <a href="stats.html">Stats</a>
+        </nav>
+        <button onclick="toggleDarkMode()" class="toggleDark-btn"></button>
+    </header>
+
+    <main id="app">
+        <div class="page-title-container">
+            <a href="past.html"><i class="bi bi-chevron-left"></i></a>
+            <h1 class="font-semibold">Contact Us</h1>
+            <a href="stats.html"><i class="bi bi-chevron-right"></i></a>
+        </div>
+
+        <form action="#" class="flex p-5 my-auto" @submit="toggleContactModal($event)">
+            <div class="card w-96 ">
+                <div class="bg-black h-36 flex text-pink-700 text-8xl"><i class="bi bi-envelope-paper-fill m-auto"></i>
+                </div>
+                <div class="contact-details">
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" name="name" v-model="contactContent.name" required>
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" v-model="contactContent.email" required>
+                    <label for="events">Event:</label>
+                    <select name="event" id="events" v-model="contactContent.event">
+                        <option value="not-selected" disabled>Choose an event</option>
+                        <option v-for="event of events.sort((a, b) => a.name.localeCompare(b.name))" :value="event.name">{{event.name}}</option>
+                    </select>
+                    <!-- {{selectEvent()}} -->
+                    <!-- {{contactContent.event}} -->
+                    <label for="message">Message:</label>
+                    <textarea id="message" name="message" class="p-2" v-model="contactContent.message" required></textarea>
+                    <button type="submit" class="btn">Submit</button>
+                </div>
+            </div>
+
+        </form>
+
+        <div v-if="contactContent.showModal" class="relative z-10" id="contact-modal">
+            <div class="fixed inset-0 bg-slate-700/40 backdrop-blur"></div>
+            <div class="fixed inset-0 z-10">
+                <div class="flex min-h-full justify-center p-4 items-center">
+                    <div id="modal" class="card max-w-lg">
+                        <div class="bg-pink-700 h-36 flex text-slate-50 text-8xl"><i class="bi bi-check-circle-fill m-auto"></i></div>
+                        <div class="p-6 text-lg">
+                            <p>Thank you for your message! We will get back to you as soon as possible. Here are the details you submitted:</p>
+                            <div class="my-6 p-6 opacity-70 text-sm grid col-span-1 bg-slate-400/50 rounded-2xl" id="contactContent">
+                                <div v-if="contactContent.name">
+                                    <p class="capitalize font-semibold">Name</p>
+                                    <p class="opacity-70">{{contactContent.name}}</p>
+                                </div>
+                                <div v-if="contactContent.email">
+                                    <p class="capitalize font-semibold">Email</p>
+                                    <p class="opacity-70">{{contactContent.email}}</p>
+                                </div>
+                                <div v-if="contactContent.event">
+                                    <p class="capitalize font-semibold">Event</p>
+                                    <p class="opacity-70">{{contactContent.event}}</p>
+                                </div>
+                                <div v-if="contactContent.message">
+                                    <p class="capitalize font-semibold">Message</p>
+                                    <p class="opacity-70">{{contactContent.message}}</p>
+                                </div>
+                            </div>
+                            <button class="btn mt-auto" @click="toggleContactModal()">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="socials-container">
+            <a href="#"><i class="bi bi-instagram"></i></a>
+            <a href="#"><i class="bi bi-facebook"></i></a>
+            <a href="#"><i class="bi bi-whatsapp"></i></a>
+        </div>
+        <div class="commission">FE05-TN</div>
+    </footer>
+
+    <script src="https://unpkg.com/vue@3.2.47/dist/vue.global.js"></script>
+    <script src="assets/js/main.js"></script>
+</body>
+
+</html>

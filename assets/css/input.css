@@ -1,0 +1,92 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+    body {
+        @apply hidden min-h-screen flex-col bg-slate-100 duration-500 dark:bg-[#15151c];
+    }
+    header {
+        @apply sticky top-0 z-10 flex flex-wrap items-center justify-between bg-black px-4 text-slate-50 shadow-2xl backdrop-blur dark:bg-black/60;
+    }
+    .menu-btn {
+        @apply hidden py-2 text-4xl hover:cursor-pointer;
+    }
+    nav {
+        @apply flex text-sm font-semibold uppercase transition-all max-md:w-full max-md:flex-col max-md:peer-checked/close-nav:hidden md:mr-6 [&>*:hover]:bg-pink-700 [&>*]:rounded-lg [&>*]:p-4;
+    }
+    .toggleDark-btn {
+        @apply absolute top-3 text-2xl max-md:right-14 md:top-2 md:right-4;
+    }
+    .page-title-container {
+        @apply flex items-center justify-between bg-pink-700 p-4 text-center text-5xl text-slate-50 shadow-xl [&>*]:max-md:text-4xl [&>a:hover]:scale-110;
+    }
+    .filter-container {
+        @apply flex items-center justify-center gap-2 dark:text-slate-50 max-md:flex-col;
+    }
+    .category-container {
+        @apply flex flex-wrap justify-evenly gap-2 rounded-2xl text-center uppercase max-lg:peer-checked/filter-close:hidden max-md:flex-col [&>*]:rounded-2xl [&>input:checked+label]:bg-pink-700 [&>input:checked+label]:text-slate-50 [&>input]:hidden [&>label]:border-2 [&>label]:border-pink-700 [&>label]:px-2  [&>label]:shadow-md;
+    }
+    main {
+        @apply flex flex-shrink flex-grow flex-col;
+    }
+    .events-container {
+        @apply my-auto flex flex-wrap gap-8 p-4;
+    }
+    .card {
+        @apply mx-auto flex flex-col overflow-hidden rounded-2xl bg-slate-50 shadow-md shadow-slate-400/70 dark:bg-black   dark:text-slate-50 dark:shadow-slate-700;
+    }
+    .event-container {
+        @apply card relative w-96 transition-all hover:brightness-110  md:hover:scale-110 md:hover:shadow-2xl;
+    }
+    .event-category {
+        @apply absolute rounded-lg bg-pink-700 py-1 px-3 uppercase text-slate-50;
+    }
+    .event-img {
+        @apply h-80 border-b-8 border-pink-700 object-cover max-md:h-60;
+    }
+    .event-content {
+        @apply flex flex-grow flex-col gap-2 p-4;
+    }
+    .event-title-container {
+        @apply -mt-1.5 flex flex-col justify-between gap-2 px-4;
+    }
+    .event-title {
+        @apply text-center text-2xl font-semibold;
+    }
+    .event-details {
+        @apply flex flex-wrap justify-between font-mono text-lg font-semibold [&_i]:text-pink-700;
+    }
+    .event-date-container {
+        @apply w-24 overflow-hidden  rounded-md bg-slate-100 text-center font-bold shadow-md shadow-slate-400 dark:bg-slate-800;
+    }
+    .btn {
+        @apply mt-4 w-full rounded-3xl bg-slate-800 p-1 text-center font-mono text-2xl font-semibold text-slate-50 shadow-md hover:bg-pink-700 group-hover:bg-pink-700;
+    }
+    footer {
+        @apply grid grid-cols-1 gap-4 bg-black p-4 text-3xl text-slate-50 md:grid-cols-3;
+    }
+    .socials-container {
+        @apply flex justify-center gap-4 md:col-start-2 [&>*]:rounded-full [&>*]:bg-pink-700 [&>*]:p-3 [&>a:hover]:brightness-125;
+    }
+    .commission {
+        @apply my-auto text-center font-mono font-semibold md:text-right;
+    }
+    .contact-details {
+        @apply flex flex-grow flex-col p-4 [&>*:not(label)]:mb-3 [&>*:not(label)]:flex-grow  [&>*:not(label)]:p-2;
+    }
+    input,
+    textarea,
+    select {
+        @apply rounded-lg bg-blue-100/50 text-slate-900/70 shadow-md outline-4 outline-pink-500 dark:bg-slate-600 dark:text-slate-50/70 placeholder:dark:text-slate-50/80 [&>*]:dark:bg-slate-600;
+    }
+    .table-container {
+        @apply card  w-[50rem] text-center dark:bg-slate-700 dark:text-slate-50;
+    }
+    .table-title {
+        @apply bg-black p-3 text-2xl uppercase text-slate-50 [&~*]:bg-pink-700;
+    }
+    .table-subtitle {
+        @apply h-10 bg-pink-700 font-thin text-slate-50  [&~*:nth-child(even)]:bg-slate-200 dark:[&~*:nth-child(even)]:bg-slate-900;
+    }
+}

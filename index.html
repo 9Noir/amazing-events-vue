@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+    <title>Home</title>
+</head>
+
+<body>
+    <header>
+        <a href="index.html">
+            <img class="w-40" src="assets/img/Logo_Amazing_Events.png" alt="Logo Amazing Events">
+        </a>
+        <input type="radio" id="open-nav" class="peer/open-nav hidden" name="menu-navbar">
+        <input type="radio" name="menu-navbar" class="peer/close-nav hidden" id="close-nav" checked>
+        <label for="open-nav" class="menu-btn max-md:peer-checked/close-nav:flex"><i class="bi bi-list"></i></label>
+        <label for="close-nav" class="menu-btn max-md:peer-checked/open-nav:flex"><i class="bi bi-x"></i></label>
+        <nav class="">
+            <a href="#">Home</a>
+            <a href="upcoming.html">Upcoming Events</a>
+            <a href="past.html">Past Events</a>
+            <a href="contact.html">Contact</a>
+            <a href="stats.html">Stats</a>
+        </nav>
+        <button onclick="toggleDarkMode()" class="toggleDark-btn"></button>
+    </header>
+
+    <main id="app">
+        <div class="page-title-container">
+            <a href="stats.html"><i class="bi bi-chevron-left"></i></a>
+            <h1 class="font-semibold">Home</h1>
+            <a href="upcoming.html"><i class="bi bi-chevron-right"></i></a>
+        </div>
+
+        <div class="flex p-4 gap-2">
+            <div class="filter-container">
+                <input type="radio" id="filter-open" class="peer/filter-open hidden" name="filter-status">
+                <input type="radio" name="filter-status" class="peer/filter-close hidden grayscale" id="filter-close" checked>
+                <label for="filter-open" class="max-lg:peer-checked/filter-close:flex py-0 menu-btn"><i class="bi bi-filter-circle"></i></label>
+                <label for="filter-close" class="max-lg:peer-checked/filter-open:flex py-0 menu-btn bi bi-x"></label>
+                <div class="category-container" v-for="category of categories">
+                    {{filterEvents}}
+                    <input type="checkbox" v-model="checkedCategories" :id="category" :name="category" :value="category"><label :for="category">{{category}}</label>
+                </div>
+            </div>
+            <div class="flex items-start gap-1 flex-grow">
+                <input type="search" v-model="searchText" placeholder="Search" class="p-2 w-0 rounded-lg flex-grow">
+            </div>
+        </div>
+
+        <div v-if="currentDate" class="card my-4 event-details">
+            <p class="bg-pink-700 p-2 text-xl rounded-lg text-slate-50">{{new Date(currentDate).toUTCString().slice(0, 16)}}</p>
+        </div>
+
+        <div class="events-container">
+            <template id="app" v-for="event of filteredEvents" class="my-4 md:col-span-2 capitalize">
+                <a :href="'details.html?id=' + event.id" :class="['event-container', 'group', { 'grayscale': new Date(currentDate) > new Date(event.date) }]">
+                    <p class="event-category" title="Category">{{event.category}}</p>
+                    <img class="event-img" :src="event.image" :alt="'Image of '+event.name">
+                    <div class="event-content">
+                        <div class="flex flex-grow">
+                            <div title="Date">
+                                <div class="event-date-container">
+                                    <p class="event-month bg-pink-700 text-xl text-slate-50">{{splitDate(event.date,1)}}</p>
+                                    <div class="px-3">
+                                        <p class="event-day text-5xl py-4">{{splitDate(event.date,2)}}</p>
+                                        <div class="flex justify-between text-sm font-normal pb-2">
+                                            <p class="event-weekDay">{{splitDate(event.date,0)}}</p>
+                                            <p class="event-year">{{splitDate(event.date,3)}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="event-title-container">
+                                <div>
+                                    <p class="event-title text-left" title="Event name">{{event.name}}</p>
+                                    <p class="event-description" title="Description">{{event.description}}</p>
+                                </div>
+                                <div class="event-details">
+                                    <p class="event-price" title="Price"><i class="bi bi-credit-card-fill"></i> ${{event.price}}</p>
+                                    <p class="event-place" title="Place"><i class="bi bi-geo-alt-fill"></i> {{event.place}}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="btn">Details</div>
+                    </div>
+                </a>
+            </template>
+        </div>
+    </main>
+
+    <footer>
+        <div class="socials-container">
+            <a href="#"><i class="bi bi-instagram"></i></a>
+            <a href="#"><i class="bi bi-facebook"></i></a>
+            <a href="#"><i class="bi bi-whatsapp"></i></a>
+        </div>
+        <div class="commission">FE05-TN</div>
+    </footer>
+
+    <script src="https://unpkg.com/vue@3.2.47/dist/vue.global.js"></script>
+    <script src="assets/js/main.js"></script>
+</body>
+
+</html>
