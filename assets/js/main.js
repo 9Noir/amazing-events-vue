@@ -3,7 +3,7 @@ const eventNotFound = [{ id: 0, image: "https://i.ibb.co/HzD6k2W/image.png", nam
 const { createApp } = Vue;
 createApp({
     data() {
-        return { currentDate: "", events: [], filteredEvents: [], categories: [], checkedCategories: [], searchText: "", contactContent: { showModal: false }, statsData: {} };
+        return { currentDate: "", events: [], filteredEvents: [], categories: [], checkedCategories: [], searchText: "", contactContent: {showModal: false }, statsData: {} };
     },
     async created() {
         setDarkMode();
@@ -13,6 +13,7 @@ createApp({
         this.currentDate = data.currentDate;
         this.events = data.events?.sort((event1, event2) => new Date(event2.date) - new Date(event1.date)) || [data.response];
         this.categories = this.getUniqueCategories(this.events);
+        if (document.title.includes("Contact")) this.selectEvent();
     },
     methods: {
         fetchData(params) {
@@ -32,9 +33,9 @@ createApp({
             return new Date(eventDate).toDateString().split(" ")[dateIndex];
         },
         extractIdFromUrl: () => new URLSearchParams(window.location.search).get("id"),
-        // selectEvent() {
-        //     this.contactContent.event = this.events.find((e) => e.id == this.extractIdFromUrl()).name;
-        // },
+        selectEvent() {
+            this.contactContent.event = this.events.find((e) => e.id == this.extractIdFromUrl())?.name || "not-selected"; //Si no se encuentra, no se accede a name, y entonces se asigna "not-selected"
+        },
         toggleContactModal(event) {
             event?.preventDefault();
             this.contactContent.showModal = !this.contactContent.showModal;
@@ -67,7 +68,7 @@ createApp({
                         )
                 )
                 .sort((a, b) => b.revenues - a.revenues);
-        }
+        },
     },
     computed: {
         filterEvents() {

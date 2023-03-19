@@ -50,8 +50,6 @@
                         <option value="not-selected" disabled>Choose an event</option>
                         <option v-for="event of events.sort((a, b) => a.name.localeCompare(b.name))" :value="event.name">{{event.name}}</option>
                     </select>
-                    <!-- {{selectEvent()}} -->
-                    <!-- {{contactContent.event}} -->
                     <label for="message">Message:</label>
                     <textarea id="message" name="message" class="p-2" v-model="contactContent.message" required></textarea>
                     <button type="submit" class="btn">Submit</button>
