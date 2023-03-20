@@ -60,6 +60,9 @@
     .event-date-container {
         @apply w-24 overflow-hidden  rounded-md bg-slate-100 text-center font-bold shadow-md shadow-slate-400 dark:bg-slate-800;
     }
+    .event-month {
+        @apply uppercase;
+    }
     .btn {
         @apply mt-4 w-full rounded-3xl bg-slate-800 p-1 text-center font-mono text-2xl font-semibold text-slate-50 shadow-md hover:bg-pink-700 group-hover:bg-pink-700;
     }
