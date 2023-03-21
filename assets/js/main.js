@@ -42,7 +42,7 @@ createApp({
         },
         async getEventStats() {
             const upcomingEvents = (await this.fetchData("?time=upcoming")).events;
-            const pastEvents = (await this.fetchData("?time=past")).events.sort((a, b) => a.assistance - b.assistance);
+            const pastEvents = (await this.fetchData("?time=past")).events.sort((a, b) => a.assistance/a.capacity - b.assistance/b.capacity);
             const [maxAssisEvent, minAssisEvent] = [pastEvents[pastEvents.length - 1], pastEvents[0]];
             const maxCapEvent = pastEvents.sort((a, b) => b.capacity - a.capacity)[0];
             let [upcomingCat, pastCat] = [this.getUniqueCategories(upcomingEvents), this.getUniqueCategories(pastEvents)];

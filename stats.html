@@ -57,8 +57,8 @@
                             <td>{{statsData.maxCapEvent.name}}</td>
                         </tr>
                         <tr>
-                            <td>{{statsData.maxAssisEvent.assistance}}</td>
-                            <td>{{statsData.minAssisEvent.assistance}}</td>
+                            <td>{{(statsData.maxAssisEvent.assistance/statsData.maxAssisEvent.capacity*100).toFixed(2)}}%</td>
+                            <td>{{(statsData.minAssisEvent.assistance/statsData.minAssisEvent.capacity*100).toFixed(2)}}%</td>
                             <td>{{statsData.maxCapEvent.capacity}}</td>
                         </tr>
                         <tr>
