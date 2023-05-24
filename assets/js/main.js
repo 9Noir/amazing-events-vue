@@ -11,13 +11,13 @@ createApp({
         if (path == "stats") return await this.getEventStats();
         const data = await this.fetchData(path);
         this.currentDate = data.currentDate;
-        this.events = data.events?.sort((event1, event2) => new Date(event2.date) - new Date(event1.date)) || [data.response];
+        this.events = data.events?.sort((event1, event2) => new Date(event2.date) - new Date(event1.date)) || [data];
         this.categories = this.getUniqueCategories(this.events);
         if (document.title.includes("Contact")) this.selectEvent();
     },
     methods: {
         fetchData(params) {
-            return fetch(`https://api-amazingevents.onrender.com/api/amazing-events${params || ""}`).then((response) => response.json());
+            return fetch(`https://5k6e2.wiremockapi.cloud/amazing-events${params || ""}`).then((response) => response.json());
         },
         getParams() {
             const title = document.title.split(" ")[0].toLowerCase();
